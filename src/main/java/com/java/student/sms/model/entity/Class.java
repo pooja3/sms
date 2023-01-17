@@ -1,15 +1,18 @@
 package com.java.student.sms.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "classes")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,6 +20,7 @@ public class Class {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "classId")
     Long classId;
 
     String className;
@@ -27,5 +31,20 @@ public class Class {
 
     Integer strength;
 
-    Long courseId;
+    @JsonIgnore
+    @OneToOne(mappedBy = "studentClass")
+    Student student;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Class aClass = (Class) o;
+        return classId != null && Objects.equals(classId, aClass.classId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

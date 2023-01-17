@@ -1,23 +1,26 @@
 package com.java.student.sms.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "students")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "studentId")
     Long studentId;
 
     Long rollNumber;
@@ -28,10 +31,29 @@ public class Student {
 
     Date dateOfBirth;
 
-    String emailId;
+    String studentEmailId;
 
-    Long parentId;
+    @JsonIgnore()
+    @OneToOne
+    @JoinColumn(name = "parentId")
+    Parent parent;
 
-    Long classId;
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "classId")
+    Class studentClass;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Student student = (Student) o;
+        return studentId != null && Objects.equals(studentId, student.studentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
 

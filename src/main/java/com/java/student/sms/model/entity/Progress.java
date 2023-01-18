@@ -1,5 +1,6 @@
 package com.java.student.sms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -13,7 +14,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Progress {
@@ -25,7 +25,10 @@ public class Progress {
 
     Float overallPercentage;
 
-    Long studentId;
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "studentId")
+    Student student;
 
     @Column
     @ElementCollection(targetClass = Integer.class)

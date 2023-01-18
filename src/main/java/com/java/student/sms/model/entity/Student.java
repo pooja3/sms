@@ -43,6 +43,14 @@ public class Student {
     @JoinColumn(name = "classId")
     Class studentClass;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "student")
+    Progress progress;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "student")
+    FeeStatus feeStatus;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

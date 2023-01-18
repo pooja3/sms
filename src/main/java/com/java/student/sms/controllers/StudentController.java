@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class StudentController {
@@ -82,7 +83,7 @@ public class StudentController {
     }
 
     /**
-     * @param studentId
+     * @param studentId internal studentId to query result
      * @return Topper of the class.
      */
     @GetMapping("/api/students/progress/{studentId}")
@@ -101,5 +102,26 @@ public class StudentController {
             return ResponseEntity.ok().body(studentProgress);
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/api/students/parent/{studentId}")
+    public ResponseEntity<?> findParentDetailsOfStudent(@PathVariable("studentId") Long studentId) {
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+            StudentWithParents studentWithParent = StudentWithParents.builder()
+                    .rollNumber(student.getRollNumber())
+                    .firstName(student.getFirstName())
+                    .lastName(student.getLastName())
+                    .dateOfBirth(student.getDateOfBirth())
+                    .studentEmailId(student.getStudentEmailId())
+                    .fatherName(student.getParent().getFatherName())
+                    .motherName(student.getParent().getMotherName())
+                    .className(student.getStudentClass().getClassName())
+                    .build();
+            return ResponseEntity.ok().body(studentWithParent);
+        }
+        return ResponseEntity.badRequest().body("Cannot find student id...");
     }
 }

@@ -39,7 +39,7 @@ public class Student {
     Parent parent;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "classId")
     Class studentClass;
 

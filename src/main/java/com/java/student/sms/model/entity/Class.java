@@ -5,7 +5,10 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "classes")
@@ -31,8 +34,8 @@ public class Class {
     Integer strength;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "studentClass")
-    Student student;
+    @OneToMany(mappedBy = "studentClass")
+    List<Student> student = new ArrayList<>();
 
     @JsonIgnore
     @OneToOne(mappedBy = "classWithFees")

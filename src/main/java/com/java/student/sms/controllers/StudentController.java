@@ -119,4 +119,9 @@ public class StudentController {
         }
         return ResponseEntity.badRequest().body("Cannot find student id...");
     }
+
+    // @GetMapping("/api/students/sample")
+    // public ResponseEntity<?> findProgress() {
+    //     return ResponseEntity.ok().body(studentRepository.findByProgress_OverallPercentageGreaterThan(92.0f));
+    // }
 }

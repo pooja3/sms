@@ -67,14 +67,14 @@ public class StudentController {
     @GetMapping("/api/students/topper/{className}")
     public ResponseEntity<?> findTopperOfClass(@PathVariable("className") String className) {
         List<Student> students = studentRepository.findTopperByClassName(className);
-        if(!students.isEmpty()) {
+        if (!students.isEmpty()) {
             Student topperStudent = students.get(0);
             StudentProgress studentProgress = StudentProgress.builder()
                     .rollNumber(topperStudent.getRollNumber())
                     .firstName(topperStudent.getFirstName())
                     .lastName(topperStudent.getLastName())
                     .emailId(topperStudent.getStudentEmailId())
-                    .overallPercentage(topperStudent.getProgress().getOverallPercentage().toString()+"%")
+                    .overallPercentage(topperStudent.getProgress().getOverallPercentage().toString() + "%")
                     .className(topperStudent.getStudentClass().getClassName())
                     .build();
             return ResponseEntity.ok().body(studentProgress);
@@ -89,14 +89,14 @@ public class StudentController {
     @GetMapping("/api/students/progress/{studentId}")
     public ResponseEntity<?> findOverallPercentageOfStudent(@PathVariable("studentId") Long studentId) {
         List<Student> students = studentRepository.findProgressOfStudent(studentId);
-        if(!students.isEmpty()) {
+        if (!students.isEmpty()) {
             Student student = students.get(0);
             StudentProgress studentProgress = StudentProgress.builder()
                     .rollNumber(student.getRollNumber())
                     .firstName(student.getFirstName())
                     .lastName(student.getLastName())
                     .emailId(student.getStudentEmailId())
-                    .overallPercentage(student.getProgress().getOverallPercentage().toString()+"%")
+                    .overallPercentage(student.getProgress().getOverallPercentage().toString() + "%")
                     .className(student.getStudentClass().getClassName())
                     .build();
             return ResponseEntity.ok().body(studentProgress);

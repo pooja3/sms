@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "classes")
@@ -35,6 +34,7 @@ public class Class {
 
     @JsonIgnore
     @OneToMany(mappedBy = "studentClass")
+    @ToString.Exclude
     List<Student> student = new ArrayList<>();
 
     @JsonIgnore

@@ -18,11 +18,6 @@ public class ClassController {
     @Autowired
     ClassRepository classRepository;
 
-    @GetMapping("/hello")
-    public ResponseEntity<?> helloWorldClass() {
-        return ResponseEntity.ok().body("Hello World");
-    }
-
     @GetMapping("/fees/{classInput}")
     public ResponseEntity<?> getClassWithFees(@PathVariable("classInput") String classInput) {
         Optional<Class> optionalClassWithFees = classRepository.findByClassName(classInput);

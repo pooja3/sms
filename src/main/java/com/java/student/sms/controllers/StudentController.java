@@ -20,11 +20,6 @@ public class StudentController {
     @Autowired
     StudentRepository studentRepository;
 
-    @GetMapping("/api/hello")
-    public String helloWorld() {
-        return "Hello World";
-    }
-
     @GetMapping("/api/student/all-students")
     public ResponseEntity<?> findAllStudentsWithClass() {
         return ResponseEntity.ok().body(studentRepository.findAll());

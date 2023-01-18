@@ -35,6 +35,10 @@ public class Class {
     @OneToOne(mappedBy = "studentClass")
     Student student;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "classWithFees")
+    FeeStructure feeStructure;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

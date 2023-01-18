@@ -1,16 +1,19 @@
 package com.java.student.sms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.java.student.sms.model.entity.enums.FeeType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "fee_structure")
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,5 +28,21 @@ public class FeeStructure {
     @Enumerated(EnumType.ORDINAL)
     FeeType feeType;
 
-    Long classId;
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "classId")
+    Class classWithFees;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        FeeStructure that = (FeeStructure) o;
+        return feesId != null && Objects.equals(feesId, that.feesId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

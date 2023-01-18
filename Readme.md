@@ -1,5 +1,4 @@
 A simple system implementation for student management system.
 
-
-![Screenshot 2023-01-18 at 5.07.45 PM.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fst%2F2_chmmj91wsghzx8pvb7pz6w0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_csQ4Hz%2FScreenshot%202023-01-18%20at%205.07.45%20PM.png)
-![Screenshot 2023-01-18 at 5.08.22 PM.png](..%2F..%2F..%2F..%2Fvar%2Ffolders%2Fst%2F2_chmmj91wsghzx8pvb7pz6w0000gn%2FT%2FTemporaryItems%2FNSIRD_screencaptureui_c61qpQ%2FScreenshot%202023-01-18%20at%205.08.22%20PM.png)
+<img src="https://user-images.githubusercontent.com/8330779/213162756-e784b1f6-f568-4b5c-8f52-a0e20f604cd1.png" width=480/>
+<img src="https://user-images.githubusercontent.com/8330779/213162850-6191f6a7-95e2-4493-8cec-42c659c24666.png" width=480/>
